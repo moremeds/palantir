@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Palantir</title>
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/vendor/angular/angular-1.1.5.js"></script>
+    <script src="build/palantir.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/css/uikit.min.css">
+    <script src="js/vendor/jQuery/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/uikit/uikit.min.js"></script>
+
+
+</head>
+<body ng-app="app">
+<div ng-controller="UserControl">
+
+    <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed" data="data">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Attestation</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Received From</th>
+            <th>Approx. Cost</th>
+            <th>Gift/Entertainment</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in data">
+
+            <td><input type="text" placeholder="Name" ng-model="updated.name" ng-show="checked">
+                <span ng-hide="checked">{{user.name}}</span>
+            </td>
+
+
+            <td><input placeholder="Attestation" ng-model="updated.attestation" ng-show="checked"/>
+                <span ng-hide="checked">{{user.attestation}}</span></td>
+
+
+            <td>
+                <form class="uk-form"><input type="" data-uk-datepicker="{format:'DD.MM.YYYY'}" ng-model="updated.date"
+                                             ng-show="checked"/>
+                    <span ng-hide="checked">{{user.date}}</span></form>
+            </td>
+
+
+            <td><input placeholder="Description" type="text" ng-model="updated.description" ng-show="checked"/>
+                <span ng-hide="checked">{{user.description}}</span></td>
+
+
+            <td><input placeholder="Received From" type="text" ng-model="updated.receive" ng-show="checked"/>
+                <span ng-hide="checked">{{user.receive}}</span></td>
+
+
+            <td><input placeholder="Approx. Cost" type="text" ng-model="updated.cost" ng-show="checked"/>
+                <span ng-hide="checked">{{user.cost}}</span></td>
+
+
+            <td>
+                <select ng-model="updated.mode" ng-show="checked">
+                    <option>gift</option>
+                    <option>entertainment</option>
+                </select>
+
+                <span ng-hide="checked"> {{user.mode}}</span></td>
+
+
+            <td>
+                <button ng-click="deleteUser(user)" ng-hide="checked">Delete</button>
+                <button ng-click="updateUser(updated, user)" ng-show="checked">Update</button>
+
+                <input type="checkbox" ng-model="checked">
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <form class="uk-form">
+        <fieldset data-uk-margin>
+            <input type="text" placeholder="Name" ng-model="user.name" required/>
+            <input placeholder="Attestation" ng-model="user.attestation"/>
+            <input type="" data-uk-datepicker="{format:'DD.MM.YYYY'}" ng-model="user.date"/>
+            <br>
+            <input placeholder="Description" type="text" ng-model="user.description"/>
+            <input placeholder="Received From" type="text" ng-model="user.receive"/>
+            <input placeholder="Approx. Cost" type="text" ng-model="user.cost"/>
+
+            <select ng-model="user.mode">
+                <option>gift</option>
+                <option>entertainment</option>
+            </select>
+
+        </fieldset>
+        <br>
+        <button ng-click="reset()">Reset</button>
+        <button ng-click="save(user)" ng-disabled="form.$invalid">Save</button>
+    </form>
+</div>
+</body>
+</html>
