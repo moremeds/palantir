@@ -9,6 +9,8 @@ var express = require('express'),
 
 server.listen(serverConfig.port);
 
+//app is the express() instance, 
+//get the request and response from client side
 app.get('/', function (req, res) {
     "use strict";
     res.sendfile(path.resolve(__dirname + "/../client") + "/index.html");
